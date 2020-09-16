@@ -58,7 +58,6 @@ def _telegram_file(client, message):
     file = message.audio
          message.command:
       file = message.command[1]
-    else:
       file = message.text
     if '|' in file:
         file, filename = file.split('|')
