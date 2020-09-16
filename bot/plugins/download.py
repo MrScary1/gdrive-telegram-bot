@@ -58,6 +58,11 @@ def _telegram_file(client, message):
     file = message.audio
   sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
   LOGGER.info(f'Download:{user_id}: {file.file_id}')
+
+    if message.command:
+      file = message.command[1]
+    else:
+      file = message.text
 if '|' in file:
         file, filename = file.split('|')
         file = file.strip()
