@@ -56,7 +56,6 @@ def _telegram_file(client, message):
     file = message.video
   elif message.audio:
     file = message.audio
-         message.command:
       if message.command:
       file = message.command[1]
     else:
