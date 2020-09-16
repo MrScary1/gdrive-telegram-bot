@@ -46,8 +46,6 @@ def _download(client, message):
         sent_message.edit(Messages.DOWNLOAD_ERROR.format(file_path, link))
 
 
-
-
 @Client.on_message(filters.private & filters.incoming & (filters.document | filters.audio | filters.video) & CustomFilters.auth_users)
 def _telegram_file(client, message):
   user_id = message.from_user.id
@@ -60,8 +58,7 @@ def _telegram_file(client, message):
     file = message.audio
   sent_message.edit(Messages.DOWNLOAD_TG_FILE.format(file.file_name, humanbytes(file.file_size), file.mime_type))
   LOGGER.info(f'Download:{user_id}: {file.file_id}')
-   else:
-        if '|' in file:
+if '|' in file:
         file, filename = file.split('|')
         file = file.strip()
         filename.strip()
@@ -75,8 +72,6 @@ def _telegram_file(client, message):
     sent_message.edit(Messages.WENT_WRONG)
   LOGGER.info(f'Deleteing: {file_path}')
   os.remove(file_path)
-
-
 
 @Client.on_message(filters.incoming & filters.private & filters.command(BotCommands.Ytdl) & CustomFilters.auth_users)
 def _ytdl(client, message):
